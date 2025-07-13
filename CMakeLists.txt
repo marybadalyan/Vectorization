@@ -12,9 +12,7 @@ set(ANALYSIS_DIR "${CMAKE_BINARY_DIR}/analysis")
 file(MAKE_DIRECTORY ${ANALYSIS_DIR})
 
 
-# --- Let CMake handle the optimization flags ---
-# We don't need to set /Od or /O2 manually. CMake does this for us
-# based on the build type (Debug or Release).
+target_compile_options(Vectorization PRIVATE -O3 -mavx2)
 
 # --- Correct Assembly Generation ---
 if(MSVC)
