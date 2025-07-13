@@ -79,24 +79,17 @@ jobs:
         working-directory: ${{ steps.strings.outputs.build-output-dir }}
         shell: bash
         run: |
-          exe="Vectorization"
-          analysis_dir="analysis"
-          mkdir -p "${analysis_dir}"
-          opt_level="O3"
           if [ "$RUNNER_OS" == "Windows" ]; then
-            executable_name="${{ matrix.build_type }}/${exe}.exe"
+            executable_name="${{ matrix.build_type }}/Vectorization.exe"
+            analysis_file="analysis/assembly.txt"
           else
-            executable_name="${exe}"
+            executable_name="Vectorization"
+            analysis_file="analysis/assembly.txt"
           fi
 
-          analysis_file="${analysis_dir}/assembly.txt"
-
-          echo "--------------------------------------------------"
-          echo "Running ${executable_name}..."
-
-          if [ -f "${executable_name}" ]; then
-            "./${executable_name}" "${analysis_file}" "${opt_level}"
+          if [ -f "$executable_name" ]; then
+            "./$executable_name" "$analysis_file"
           else
-            echo "Error: Executable not found: $(pwd)/${executable_name}"
+            echo "Executable not found at: $executable_name"
             exit 1
           fi
