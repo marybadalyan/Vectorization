@@ -1,4 +1,3 @@
-````markdown
 # Vectorization Benchmark and Assembly Analysis
 
 This project demonstrates **automatic and manual vectorization** using **AVX2 SIMD instructions** in C++. It benchmarks and inspects how vectorization affects the generated assembly and execution performance.
