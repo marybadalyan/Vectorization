@@ -80,7 +80,11 @@ jobs:
           pwd
           echo "Files:"
           find . -type f
-  
+      - name: Print final path to analysis file
+        run: |
+          echo "Expecting analysis at: ${{ steps.strings.outputs.build-output-dir }}/analysis/assembly.txt"
+          ls -l ${{ steps.strings.outputs.build-output-dir }}
+
       - name: Run Executable
         working-directory: ${{ steps.strings.outputs.build-output-dir }}
         shell: bash
@@ -90,7 +94,7 @@ jobs:
             analysis_file="analysis/assembly.txt"
           else
             executable_name="Vectorization"
-            analysis_file="build/analysis/assembly.txt"
+            analysis_file="analysis/assembly.txt"
           fi
 
           if [ -f "$executable_name" ]; then
