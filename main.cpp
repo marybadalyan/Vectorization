@@ -51,6 +51,26 @@ bool printFunctionAssembly(std::ifstream& asmFile, const std::string& functionNa
     return printedHeader;  // return true if we found and printed something
 }
 
+void PrintFullAssembly(const std::string & assemblyFilePath)
+{
+    std::ifstream asmFile(assemblyFilePath);
+    if (!asmFile) {
+        std::cerr << "Failed to open assembly file: " << assemblyFilePath << "\n";
+        return;
+    }
+
+    std::cout << "\n--- Full Assembly Output ---\n\n";
+
+    std::string line;
+    while (std::getline(asmFile, line)) {
+        std::cout << line << '\n';
+    }
+
+    std::cout << "\n--- End of Full Assembly ---\n\n";
+
+    asmFile.close();
+}
+
 int main(int argc ,char * argv[]){
      int n = 64;
    
@@ -116,6 +136,8 @@ int main(int argc ,char * argv[]){
         std::cerr << "Failed to find assembly for " << mangledRunVectorizedName << '\n';
     }
 
+    PrintFullAssembly(assemblyFilePath);
+    
     asmFile.close();
 
 
