@@ -74,6 +74,22 @@ jobs:
         # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
         run: ctest --build-config ${{ matrix.build_type }}
 
+      - name: Debug Linux Build Output
+        if: runner.os == 'Linux'
+        working-directory: ${{ steps.strings.outputs.build-output-dir }}
+        shell: bash
+        run: |
+          echo "--- 1. Verifying what files exist and their sizes ---"
+          ls -R .
+          echo "---"
+          echo "Line count of generated assembly files:"
+          wc -l analysis/assembly.txt || echo "assembly.txt not found"
+
+          echo "--- 2. Checking if objdump is available ---"
+          which objdump
+
+          echo "--- 3. Verifying the executable file type ---"
+          file Vectorization
   
       - name: Run Executable
         working-directory: ${{ steps.strings.outputs.build-output-dir }}
