@@ -96,8 +96,8 @@ int main(int argc ,char * argv[]){
         const std::string mangledRunName = "add@@YAXPEIAH00H@Z"; // MSVC
         const std::string mangledRunVectorizedName = "?add_vectorized@@YAXPEAH00H@Z"; // MSVC
     #else
-        const std::string mangledRunName = "_Z3addv";     // GCC/Clang
-        const std::string mangledRunVectorizedName = "_Z3add_vectorizedv";     // GCC/Clang
+        const std::string mangledRunName = "_Z3addPiiii";     // GCC/Clang
+        const std::string mangledRunVectorizedName = "_Z13add_vectorizedPiiii";     // GCC/Clang
     #endif
 
     bool foundAdd = printFunctionAssembly(asmFile, mangledRunName);
