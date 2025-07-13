@@ -74,17 +74,6 @@ jobs:
         # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
         run: ctest --build-config ${{ matrix.build_type }}
 
-      - name: Debug file structure
-        run: |
-          echo "Current directory:"
-          pwd
-          echo "Files:"
-          find . -type f
-      - name: Print final path to analysis file
-        run: |
-          echo "Expecting analysis at: ${{ steps.strings.outputs.build-output-dir }}/analysis/assembly.txt"
-          ls -l ${{ steps.strings.outputs.build-output-dir }}
-
       - name: Run Executable
         working-directory: ${{ steps.strings.outputs.build-output-dir }}
         shell: bash
@@ -103,3 +92,4 @@ jobs:
             echo "Executable not found at: $executable_name"
             exit 1
           fi
+          
