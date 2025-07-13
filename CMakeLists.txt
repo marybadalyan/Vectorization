@@ -11,10 +11,12 @@ add_executable(Vectorization main.cpp)
 set(ANALYSIS_DIR "${CMAKE_BINARY_DIR}/analysis")
 file(MAKE_DIRECTORY ${ANALYSIS_DIR})
 
+if(MSVC)
+    target_compile_options(Vectorization PRIVATE /O2 /arch:AVX2)
+else()
+    target_compile_options(Vectorization PRIVATE -O3 -mavx2)
+endif()
 
-target_compile_options(Vectorization PRIVATE -O3 -mavx2)
-
-# --- Correct Assembly Generation ---
 if(MSVC)
     add_custom_command(
         TARGET Vectorization POST_BUILD
