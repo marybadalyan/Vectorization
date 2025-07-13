@@ -97,7 +97,7 @@ jobs:
         run: |
           if [ "$RUNNER_OS" == "Windows" ]; then
             executable_name="${{ matrix.build_type }}/Vectorization.exe"
-            analysis_file="${ANALYSIS_DIR}/assembly.txt"
+            analysis_file="analysis/assembly.txt"
           else
             executable_name="Vectorization"
             analysis_file="${ANALYSIS_DIR}/assembly.txt"
